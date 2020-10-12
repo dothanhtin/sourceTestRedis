@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Sample";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sample</h2>
+
+<div class="row" style="margin:20px">
+    <div id="grid">
+
+    </div>
+    <div>
+        <button id="btn_add" class="btn btn-default">Add</button>
+        <button id="btn_edit" class="btn btn-success">Edit</button>
+        <button id="btn_del" class="btn btn-danger">Delete</button>
+    </div>
+    @*<div id="chat" style="width: 400px; height: 600px"></div>*@
+</div>
+<div id="dialog">
+    <div class="col-md-11">
+        <div class="row">
+            <label class="lbl">Tên</label><br />
+            <input class="k-textbox" id="ten" style="width:100%" /><br />
+        </div>
+        <div class="row">
+            <label class="lbl">Mô tả</label><br />
+            <input class="k-textbox" id="des" style="width:100%" /><br />
+        </div>
+        <br />
+        <div class="row" style="text-align:center">
+            <button class="btn btn-primary" id="btn_save">Save</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+            User2........<input type="text" id="userInput2" />
+            <br />
+            User..........<input type="text" id="userInput" />
+            <input type="button" id="getUserId" value="Get UserId" />
+            <br />
+            ConnectId.<input type="text" id="txt_connectionId" />
+            <input type="button" id="getConnectId" value="Get ConnectionId" /><br />
+            ConnectId2<input type="text" id="txt_connectionId2" />
+            <br />
+            Message...<input type="text" id="messageInput" />
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+        <input type="button" id="finishedChat" value="Close Chat" />
+        <input type="button" id="finishedCall" value="Close Call" />
+    </div>
+    <br />
+    @*<div class="row">
+        <label>Link</label>
+        <select id="txt_link">
+            <option value="http://localhost:55567">Local</option>
+            <option value="https://orimx-dev.vdc2.com.vn/kong">Dev</option>
+            <option value="https://orimx-demo.vnptit.vn/kong">Demo</option>
+            <option value="https://orimx.vnptit.vn/kong">Product</option>
+        </select>
+    </div>*@
+    <div class="row">
+        <label>Số lượng request</label>
+        <input type="text" id="n_request" />
+        <br />
+        <input type="button" id="btn_sendMessage" value="Send Message forward" />
+    </div>
+    <div class="row">
+        <label>Run auto</label>
+        <input type="button" id="btn_RunAuto" value="Run" />
+        <input type="button" id="btn_StopAuto" value="Stop" style="display:none" />
+    </div>
+    <div class="row">
+        <label>Clear Prefix Key</label>
+        <input type="button" id="btn_clearPrefixKey" value="Clear Prefix Key" />
+        <br />
+        <label>Check exist key</label>
+        <input type="text" id="txt_key" />
+        <input type="button" id="btn_checkExistKey" value="Check Exist Key" />
+        <input type="button" id="btn_checkExistKeyTan" value="Check Exist Key Tan" />
+        <br />
+        <input type="button" id="btn_FlushAll" value="Flush All Keys" />
+        <br />
+        <input type="button" id="btn_setTin" value="Tindt setkey" />
+        <input type="button" id="btn_getTin" value="Tindt getKey" />
+        <input type="button" id="btn_setTan" value="Tannx setkey" />
+        <input type="button" id="btn_getTan" value="Tannx getKey" />
+        <br />
+        <input type="button" id="btn_clearKey" value="Clear key" />
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+            <ol id="messagesList"></ol>
+            <ul id="messagesTime"></ul>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <style>
+        .lbl {
+            margin: 10px 20px;
+        }
+
+        .k-textbox {
+            margin: 0 20px;
+            width: 100%;
+        }
+    </style>
+    @*Trỏ file script*@
+    <script src="@Url.Content("~/Content/Js/Sample.js?v=(new Date()).getTime()")"></script>
+    @*<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>*@
+    @*<script src="~/Scripts/jquery.signalR-2.2.2.js"></script>*@
+    <script src="~/Scripts/signalr/signalr.min.js"></script>
+    @*<script src="~/Scripts/signalr/signalr103.js"></script>*@
+}
+
