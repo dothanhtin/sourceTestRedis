@@ -161,44 +161,51 @@
         //    task(i);
         //}
 
-
+        var mode = $('input[name="mode"]:checked').val();
         //#region non delay
         while (isRun) {
             var timeAll = 0;
             if (i < Number(x)) {
                 i++;
                 //Auto with diff user
-                var data = {
-                    event: "sendmsg",
-                    timestamp: "1559027868557",
-                    oaid: "2659280042717887087",
-                    //appid: "1691033564111571589",//dev
-                    appid: "3837004637823339936",//demo
-                    //appid: "1689397181570615473",//pro
-                    //uid: "7944784300419098170",//pro
-                    uid: "6804797472710366949",//demo
-                    //uid: "test" + i,//test dev
-                    msgid: "fc142abd0909a456fd19",
-                    message: "nội dung tin nhắn " + i,
-                    username: "Tran Phat " + i,
-                    avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
-                    appname: "ORIM",
-                    apptype: "Zalo"
-                }
-                //Auto with one user
-                //var data = {
-                //    event: "sendmsg",
-                //    timestamp: "1559027868557",
-                //    oaid: "2659280042717887087",
-                //    appid: "1691033564111571589",
-                //    uid: "test",
-                //    msgid: "fc142abd0909a456fd19",
-                //    message: "nội dung tin nhắn " + i,
-                //    username: "Tran Phat",
-                //    avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
-                //    appname: "ORIM",
-                //    apptype: "Zalo"
-                //}
+                if (mode == "n users")
+                    var data = {
+                        event: "sendmsg",
+                        timestamp: "1559027868557",
+                        oaid: "2659280042717887087",
+                        //appid: "1691033564111571589",//dev
+                        appid: "3837004637823339936",//demo
+                        //appid: "1689397181570615473",//pro
+                        //uid: "7944784300419098170",//pro
+                        //uid: "6804797472710366949",//demo
+                        uid: "test" + i,//test dev
+                        msgid: "fc142abd0909a456fd19",
+                        message: "nội dung tin nhắn " + i,
+                        username: "Tindt " + i,
+                        avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
+                        appname: "ORIM",
+                        apptype: "Zalo"
+                    }
+                else
+                    //Auto with one user
+                    var data = {
+                        event: "sendmsg",
+                        timestamp: "1559027868557",
+                        oaid: "2659280042717887087",
+                        //appid: "1691033564111571589",//dev
+                        appid: "3837004637823339936",//demo
+                        //appid: "1689397181570615473",//pro
+                        //uid: "7944784300419098170",//pro
+                        uid: "6804797472710366949",//demo
+                        //uid: "test" + i,//test dev564111571589",
+                        //uid: "test",
+                        msgid: "fc142abd0909a456fd19",
+                        message: "nội dung tin nhắn " + i,
+                        username: "Tindt",
+                        avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
+                        appname: "ORIM",
+                        apptype: "Zalo"
+                    }
                 //var t2 = performance.now();
                 $.ajax({
                     type: "POST",
@@ -238,8 +245,11 @@
                 event: "sendmsg",
                 timestamp: "1559027868557",
                 oaid: "2659280042717887087",
-                appid: "1691033564111571589",
-                uid: "test",
+                //appid: "1691033564111571589",//dev
+                appid: "3837004637823339936",//demo
+                //appid: "1689397181570615473",//pro
+                //uid: "7944784300419098170",//pro
+                uid: "6804797472710366949",//demo
                 msgid: "fc142abd0909a456fd19",
                 message: "nội dung tin nhắn " + i,
                 username: "Tran Phat",
@@ -950,7 +960,8 @@
                 uid: localStorage.getItem("zaloUid"),
                 //uid:"1668401301593382803",
                 //uid: "2827532807284177",
-                supporterid: "Local/222@agents/n",
+                //supporterid: "Local/222@agents/ntest",
+                supporterid: localStorage.getItem("supporterid"),
                 supportername: "Default",
                 message: "Hi " + i,
                 imageUrl: "",
@@ -967,7 +978,7 @@
                 buttons: []
             }
             connection.invoke("SendPrivateMessageBackward", textobj, false, null).catch(err => console.log(err.toString()));
-        }, 500);
+        }, 0);
     }
     $('#finishedChat').click(function () {
         connection.invoke("FinishedChat", localStorage.getItem("zaloUid"), localStorage.getItem("appid"), "ZALO").catch(err => console.log(err.toString()));
