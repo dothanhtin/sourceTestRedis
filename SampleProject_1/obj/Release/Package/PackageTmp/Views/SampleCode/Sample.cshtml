@@ -39,7 +39,7 @@
     <div class="row">
         <div class="col-6">&nbsp;</div>
         <div class="col-6">
-            User2........<input type="text" id="userInput2" />
+            @*User2........<input type="text" id="userInput2" />
             <br />
             User..........<input type="text" id="userInput" />
             <input type="button" id="getUserId" value="Get UserId" />
@@ -47,19 +47,36 @@
             ConnectId.<input type="text" id="txt_connectionId" />
             <input type="button" id="getConnectId" value="Get ConnectionId" /><br />
             ConnectId2<input type="text" id="txt_connectionId2" />
-            <br />
+            <br />*@
             Message...<input type="text" id="messageInput" />
+            <br />
             <input type="button" id="sendButton" value="Send Message" />
         </div>
         <input type="button" id="finishedChat" value="Close Chat" />
         <input type="button" id="finishedCall" value="Close Call" />
     </div>
     <br />
+    @*<div class="row">
+        <label>Link</label>
+        <select id="txt_link">
+            <option value="http://localhost:55567">Local</option>
+            <option value="https://orimx-dev.vdc2.com.vn/kong">Dev</option>
+            <option value="https://orimx-demo.vnptit.vn/kong">Demo</option>
+            <option value="https://orimx.vnptit.vn/kong">Product</option>
+        </select>
+    </div>*@
     <div class="row">
         <label>Số lượng request</label>
         <input type="text" id="n_request" />
         <br />
         <input type="button" id="btn_sendMessage" value="Send Message forward" />
+    </div>
+    <div class="row">
+        <p>Mode send</p>
+        <input type="radio" id="r_1" name="mode" value="1 user">
+        <label for="r_1">1 user</label><br>
+        <input type="radio" id="r_n" name="mode" value="n users">
+        <label for="r_n">n users</label><br>
     </div>
     <div class="row">
         <label>Run auto</label>
@@ -73,8 +90,16 @@
         <label>Check exist key</label>
         <input type="text" id="txt_key" />
         <input type="button" id="btn_checkExistKey" value="Check Exist Key" />
+        <input type="button" id="btn_checkExistKeyTan" value="Check Exist Key Tan" />
         <br />
         <input type="button" id="btn_FlushAll" value="Flush All Keys" />
+        <br />
+        <input type="button" id="btn_setTin" value="Tindt setkey" />
+        <input type="button" id="btn_getTin" value="Tindt getKey" />
+        <input type="button" id="btn_setTan" value="Tannx setkey" />
+        <input type="button" id="btn_getTan" value="Tannx getKey" />
+        <br />
+        <input type="button" id="btn_clearKey" value="Clear key" />
     </div>
     <div class="row">
         <div class="col-12">

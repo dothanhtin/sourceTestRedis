@@ -3,10 +3,12 @@
     //var link = "http://localhost:55567";
     //var link = "http://localhost:44300";
     //var link = "http://222.255.102.205:5001";
-    var link = "https://orimx-dev.vdc2.com.vn/kong";
-    //var link = "https://orimx-demo.vnptit.vn/kong";
+    //var link = "https://orimx-dev.vdc2.com.vn/kong";
+    //var link = "https://203.162.141.14:81";
+    var link = "https://orimx-demo.vnptit.vn/kong";
     //var link = "https://orimx.vnptit.vn/kong";
     //var link = "http://10.159.135.71:81";
+    //var link = $('#txt_link').val();
     var chooseButton = 0;
     var ID = 0;
     var dialog = $("#dialog").kendoWindow({
@@ -159,40 +161,51 @@
         //    task(i);
         //}
 
-
+        var mode = $('input[name="mode"]:checked').val();
         //#region non delay
         while (isRun) {
             var timeAll = 0;
             if (i < Number(x)) {
                 i++;
                 //Auto with diff user
-                var data = {
-                    event: "sendmsg",
-                    timestamp: "1559027868557",
-                    oaid: "2659280042717887087",
-                    appid: "1691033564111571589",
-                    uid: "test" + i,
-                    msgid: "fc142abd0909a456fd19",
-                    message: "nội dung tin nhắn " + i,
-                    username: "Tran Phat " + i,
-                    avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
-                    appname: "ORIM",
-                    apptype: "Zalo"
-                }
-                //Auto with one user
-                //var data = {
-                //    event: "sendmsg",
-                //    timestamp: "1559027868557",
-                //    oaid: "2659280042717887087",
-                //    appid: "1691033564111571589",
-                //    uid: "test",
-                //    msgid: "fc142abd0909a456fd19",
-                //    message: "nội dung tin nhắn " + i,
-                //    username: "Tran Phat",
-                //    avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
-                //    appname: "ORIM",
-                //    apptype: "Zalo"
-                //}
+                if (mode == "n users")
+                    var data = {
+                        event: "sendmsg",
+                        timestamp: "1559027868557",
+                        oaid: "2659280042717887087",
+                        //appid: "1691033564111571589",//dev
+                        appid: "3837004637823339936",//demo
+                        //appid: "1689397181570615473",//pro
+                        //uid: "7944784300419098170",//pro
+                        //uid: "6804797472710366949",//demo
+                        uid: "test" + i,//test dev
+                        msgid: "fc142abd0909a456fd19",
+                        message: "nội dung tin nhắn " + i,
+                        username: "Tindt " + i,
+                        avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
+                        appname: "ORIM",
+                        apptype: "Zalo"
+                    }
+                else
+                    //Auto with one user
+                    var data = {
+                        event: "sendmsg",
+                        timestamp: "1559027868557",
+                        oaid: "2659280042717887087",
+                        //appid: "1691033564111571589",//dev
+                        appid: "3837004637823339936",//demo
+                        //appid: "1689397181570615473",//pro
+                        //uid: "7944784300419098170",//pro
+                        uid: "6804797472710366949",//demo
+                        //uid: "test" + i,//test dev564111571589",
+                        //uid: "test",
+                        msgid: "fc142abd0909a456fd19",
+                        message: "nội dung tin nhắn " + i,
+                        username: "Tindt",
+                        avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
+                        appname: "ORIM",
+                        apptype: "Zalo"
+                    }
                 //var t2 = performance.now();
                 $.ajax({
                     type: "POST",
@@ -232,8 +245,11 @@
                 event: "sendmsg",
                 timestamp: "1559027868557",
                 oaid: "2659280042717887087",
-                appid: "1691033564111571589",
-                uid: "test",
+                //appid: "1691033564111571589",//dev
+                appid: "3837004637823339936",//demo
+                //appid: "1689397181570615473",//pro
+                //uid: "7944784300419098170",//pro
+                uid: "6804797472710366949",//demo
                 msgid: "fc142abd0909a456fd19",
                 message: "nội dung tin nhắn " + i,
                 username: "Tran Phat",
@@ -317,16 +333,40 @@
     });
 
     $('#btn_clearPrefixKey').click(function () {
-        var data = {prefix: "hubchatconnected_"};
+        var data = [{ prefix: "hubchatconnected_" }];
+        //var data = [{ prefix: "7944784300419098170" }];
+        //var data = [{ prefix: "tin" }, { prefix: "tan" }];
+        for (var i = 0; i < data.length; i++) {
+            $.ajax({
+                type: "POST",
+                url: link + '/api/core/textmessage/removeprefixchathub',
+                data: JSON.stringify(data[i]),
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    alert("OK");
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        }
+    });
+
+    $('#btn_clearKey').click(function () {
+        var data = { key: $('#txt_key').val() };
+        //var data = [{ prefix: "7944784300419098170" }];
+        //var data = [{ prefix: "tin" }, { prefix: "tan" }];
         $.ajax({
             type: "POST",
-            url: link + '/api/core/textmessage/removeprefixchathub',
+            url: link + '/api/core/textmessage/RemoveKey',
             data: JSON.stringify(data),
             dataType: "json",
             contentType: "application/json;charset=utf-8",
             success: function (data) {
                 console.log(data);
-                alert("OK");
+                alert(data);
             },
             error: function (response) {
                 alert(response);
@@ -335,7 +375,8 @@
     });
 
     $('#btn_checkExistKey').click(function () {
-        var data = {key: "hubchatconnected_" + $('#txt_key').val() };
+        var data = { key: "hubchatconnected_" + $('#txt_key').val() };
+        //var data = { key: $('#txt_key').val() };
         $.ajax({
             type: "POST",
             url: link + '/api/core/textmessage/checkexistkey',
@@ -344,7 +385,26 @@
             contentType: "application/json;charset=utf-8",
             success: function (data) {
                 console.log(data);
-                alert("ok");
+                alert(data);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    });
+
+    $('#btn_checkExistKeyTan').click(function () {
+        //var data = { key: $('#txt_key').val() };
+        var data = { key: "hubchatconnected_" + $('#txt_key').val() };
+        $.ajax({
+            type: "POST",
+            url: link + '/api/core/textmessage/checkexistkeyTan',
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                alert(data);
             },
             error: function (response) {
                 alert(response);
@@ -357,6 +417,78 @@
         $.ajax({
             type: "POST",
             url: link + '/api/core/textmessage/flushallkeyredis',
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                alert(data);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    });
+
+    $('#btn_setTin').click(function () {
+        var data = { key: $('#txt_key').val(), value: $('#txt_key').val() };
+        $.ajax({
+            type: "POST",
+            url: link + '/api/core/textmessage/SetDataRedisTindt',
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                alert(data);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    });
+
+    $('#btn_getTin').click(function () {
+        var data = { key: $('#txt_key').val(), value: $('#txt_key').val() };
+        $.ajax({
+            type: "POST",
+            url: link + '/api/core/textmessage/GetDataRedisTindt',
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                alert(data);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    });
+
+    $('#btn_setTan').click(function () {
+        var data = { key: $('#txt_key').val(), value: $('#txt_key').val() };
+        $.ajax({
+            type: "POST",
+            url: link + '/api/core/textmessage/SetDataRedisTanxn',
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                alert(data);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    });
+
+    $('#btn_getTan').click(function () {
+        var data = { key: $('#txt_key').val(), value: $('#txt_key').val() };
+        $.ajax({
+            type: "POST",
+            url: link + '/api/core/textmessage/GetDataRedisTanxn',
             data: JSON.stringify(data),
             dataType: "json",
             contentType: "application/json;charset=utf-8",
@@ -572,15 +704,17 @@
     const connection = new signalR.HubConnectionBuilder()
         //.withUrl(link + "/chatHub?userid=" + "114") 
         //.withAutomaticReconnect()
-        //.withUrl(link + "/chatHub?userid=" + "Local/221@agents/n") 
+        //.withUrl(link + "/chatHub?userid=" + "Local/221@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+        .withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntest", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
         //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        .withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntestbyLamVT", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+        //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntestbyLamVT", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
         //.withUrl(link + "/chatHub?userid=" + "Local/220@agents/n") 
         //.withUrl(link + "/chatHub?userid=" + "SIP/221/n")
         .build();
     //localStorage.setItem("supporterid", "Local/221@agents/n")
     //localStorage.setItem("supporterid", "Local/222@agents/n")
-    localStorage.setItem("supporterid", "Local/222@agents/ntestbyLamVT")
+    localStorage.setItem("supporterid", "Local/222@agents/ntest")
+    //localStorage.setItem("supporterid", "Local/222@agents/ntestbyLamVT")
     //localStorage.setItem("supporterid", "Local/220@agents/n")
     //localStorage.setItem("supporterid", "SIP/221/n")
 
@@ -826,7 +960,8 @@
                 uid: localStorage.getItem("zaloUid"),
                 //uid:"1668401301593382803",
                 //uid: "2827532807284177",
-                supporterid: "Local/222@agents/n",
+                //supporterid: "Local/222@agents/ntest",
+                supporterid: localStorage.getItem("supporterid"),
                 supportername: "Default",
                 message: "Hi " + i,
                 imageUrl: "",
@@ -842,8 +977,8 @@
                 linkThumb: "",
                 buttons: []
             }
-            connection.invoke("SendPrivateMessageBackward", textobj).catch(err => console.log(err.toString()));
-        }, 500);
+            connection.invoke("SendPrivateMessageBackward", textobj, false, null).catch(err => console.log(err.toString()));
+        }, 0);
     }
     $('#finishedChat').click(function () {
         connection.invoke("FinishedChat", localStorage.getItem("zaloUid"), localStorage.getItem("appid"), "ZALO").catch(err => console.log(err.toString()));
@@ -952,70 +1087,70 @@
     });
 
     //#region Notification Hub
-    //var officerid = "79247406-9518-4473-8bc1-57da9008b05f";
-    ////var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
-    //var departmentid = "7c5f90c4-887f-4450-abbb-89217b9014fa";
-    ////var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
-    ////Listen to notify Hub
-    //var connection1 = new signalR.HubConnectionBuilder()
-    //    .withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-    //    .build();
-    //connection1.on("ReceiveNotifyCrm", () => {
-    //    //alert("hub")
-    //    var encodedMsg = 'Hub notify';
+    var officerid = "79247406-9518-4473-8bc1-57da9008b05f";
+    //var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
+    var departmentid = "7c5f90c4-887f-4450-abbb-89217b9014fa";
+    //var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
+    //Listen to notify Hub
+    var connection1 = new signalR.HubConnectionBuilder()
+        .withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+        .build();
+    connection1.on("ReceiveNotifyCrm", () => {
+        //alert("hub")
+        var encodedMsg = 'Hub notify';
 
-    //    const li = document.createElement("li");
-    //    li.textContent = encodedMsg;
-    //    document.getElementById("messagesList").appendChild(li);
-    //});
+        const li = document.createElement("li");
+        li.textContent = encodedMsg;
+        document.getElementById("messagesList").appendChild(li);
+    });
 
-    //connection1.on("TestAlone", () => {
-    //    var encodedMsg = 'Alone';
+    connection1.on("TestAlone", () => {
+        var encodedMsg = 'Alone';
 
-    //    const li = document.createElement("li");
-    //    li.textContent = encodedMsg;
-    //    document.getElementById("messagesList").appendChild(li);
-    //});
+        const li = document.createElement("li");
+        li.textContent = encodedMsg;
+        document.getElementById("messagesList").appendChild(li);
+    });
 
-    //connection1.on("ReceiveNotify", (processcode, departmentid, officerid, message) => {
-    //    var encodedMsg = 'Hub Processing: ' + "processcode: " + processcode + " departmentid: " + departmentid + " officerid: " + officerid + " message: " + message;
+    connection1.on("ReceiveNotify", (processcode, departmentid, officerid, message) => {
+        var encodedMsg = 'Hub Processing: ' + "processcode: " + processcode + " departmentid: " + departmentid + " officerid: " + officerid + " message: " + message;
 
-    //    const li = document.createElement("li");
-    //    li.textContent = encodedMsg;
-    //    document.getElementById("messagesList").appendChild(li);
-    //});
+        const li = document.createElement("li");
+        li.textContent = encodedMsg;
+        document.getElementById("messagesList").appendChild(li);
+    });
 
-    //connection1.start().then(function () {
-    //    console.log("connected1");
-    //});
+    connection1.start().then(function () {
+        console.log("connected1");
+    });
 
-    ////#region call method log out
-    //connection1.on("RequireLogOut", (userid, oldConnectionid) => {
-    //    alert("abc");
-    //    var encodedMsg = '';
-    //    console.log(userid + ": " + oldConnectionid);
-    //    encodedMsg = (userid + ": " + oldConnectionid);
-    //    const li = document.createElement("li");
-    //    li.textContent = encodedMsg;
-    //    document.getElementById("messagesList").appendChild(li);
-    //    //encodedMsg = "Log out: " + userid;
+    //#region call method log out
+    connection1.on("RequireLogOut", (userid, oldConnectionid) => {
+        alert("abc");
+        var encodedMsg = '';
+        console.log(userid + ": " + oldConnectionid);
+        encodedMsg = (userid + ": " + oldConnectionid);
+        const li = document.createElement("li");
+        li.textContent = encodedMsg;
+        document.getElementById("messagesList").appendChild(li);
+        //encodedMsg = "Log out: " + userid;
 
-    //});
-    ////#endregion
+    });
+    //#endregion
 
-    //async function Notifystart() {
-    //    try {
-    //        await connection1.start();
-    //        console.log("connected");
-    //    } catch (err) {
-    //        console.log(err);
-    //        setTimeout(() => Notifystart(), 5000);
-    //        console.log("reconnect");
-    //    }
-    //};
+    async function Notifystart() {
+        try {
+            await connection1.start();
+            console.log("connected");
+        } catch (err) {
+            console.log(err);
+            setTimeout(() => Notifystart(), 5000);
+            console.log("reconnect");
+        }
+    };
 
-    //connection1.onclose(async () => {
-    //    await Notifystart();
-    //});
+    connection1.onclose(async () => {
+        await Notifystart();
+    });
     //#endregion
 });

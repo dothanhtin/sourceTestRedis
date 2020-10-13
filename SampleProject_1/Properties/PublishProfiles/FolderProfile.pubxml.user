@@ -256,10 +256,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/24/2018 13:38:24</publishTime>
     </File>
     <File Include="bin/SampleProject_1.dll">
-      <publishTime>10/08/2020 08:42:23</publishTime>
+      <publishTime>10/13/2020 11:14:33</publishTime>
     </File>
     <File Include="bin/SampleProject_1.pdb">
-      <publishTime>10/08/2020 08:42:23</publishTime>
+      <publishTime>10/13/2020 11:14:33</publishTime>
     </File>
     <File Include="bin/System.AppContext.dll">
       <publishTime>06/10/2020 13:34:48</publishTime>
@@ -619,7 +619,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/30/2019 19:43:11</publishTime>
     </File>
     <File Include="Content/Js/Sample.js">
-      <publishTime>10/08/2020 08:42:13</publishTime>
+      <publishTime>10/13/2020 10:04:58</publishTime>
     </File>
     <File Include="Content/Kendo/Kendo2017/js/jquery.min.js">
       <publishTime>05/30/2019 20:25:38</publishTime>
@@ -2056,7 +2056,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/30/2019 19:43:00</publishTime>
     </File>
     <File Include="Views/SampleCode/Sample.cshtml">
-      <publishTime>10/07/2020 15:23:38</publishTime>
+      <publishTime>10/13/2020 11:14:14</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>05/30/2019 19:43:00</publishTime>
