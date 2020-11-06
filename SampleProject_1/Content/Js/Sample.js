@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
     //#region init
-    //var link = "http://localhost:55567";
+    var link = "http://localhost:55567";
     //var link = "http://localhost:44300";
     //var link = "http://222.255.102.205:5001";
     //var link = "https://orimx-dev.vdc2.com.vn/kong";
     //var link = "https://203.162.141.14:81";
-    var link = "https://orimx-demo.vnptit.vn/kong";
+    //var link = "https://orimx-demo.vnptit.vn/kong";
     //var link = "https://orimx.vnptit.vn/kong";
     //var link = "http://10.159.135.71:81";
     //var link = $('#txt_link').val();
@@ -167,17 +167,17 @@
             var timeAll = 0;
             if (i < Number(x)) {
                 i++;
-                //Auto with diff user
+                //Auto with diff users
                 if (mode == "n users")
                     var data = {
                         event: "sendmsg",
                         timestamp: "1559027868557",
                         oaid: "2659280042717887087",
                         //appid: "1691033564111571589",//dev
-                        appid: "3837004637823339936",//demo
-                        //appid: "1689397181570615473",//pro
-                        //uid: "7944784300419098170",//pro
+                        //appid: "3837004637823339936",//demo
                         //uid: "6804797472710366949",//demo
+                        appid: "1689397181570615473",//pro
+                        //uid: "7944784300419098170",//pro
                         uid: "test" + i,//test dev
                         msgid: "fc142abd0909a456fd19",
                         message: "nội dung tin nhắn " + i,
@@ -193,12 +193,12 @@
                         timestamp: "1559027868557",
                         oaid: "2659280042717887087",
                         //appid: "1691033564111571589",//dev
-                        appid: "3837004637823339936",//demo
-                        //appid: "1689397181570615473",//pro
-                        //uid: "7944784300419098170",//pro
-                        uid: "6804797472710366949",//demo
-                        //uid: "test" + i,//test dev564111571589",
                         //uid: "test",
+                        //appid: "3837004637823339936",//demo
+                        //uid: "6804797472710366949",//demo
+                        appid: "1689397181570615473",//pro
+                        uid: "7944784300419098170",//pro
+                        //uid: "test" + i,//test dev564111571589",
                         msgid: "fc142abd0909a456fd19",
                         message: "nội dung tin nhắn " + i,
                         username: "Tindt",
@@ -1087,9 +1087,9 @@
     });
 
     //#region Notification Hub
-    var officerid = "79247406-9518-4473-8bc1-57da9008b05f";
+    var officerid = "6a70a886-aff3-478d-8267-2e36cddef964";
     //var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
-    var departmentid = "7c5f90c4-887f-4450-abbb-89217b9014fa";
+    var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
     //var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
     //Listen to notify Hub
     var connection1 = new signalR.HubConnectionBuilder()
