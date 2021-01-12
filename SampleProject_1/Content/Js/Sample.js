@@ -333,7 +333,8 @@
     });
 
     $('#btn_clearPrefixKey').click(function () {
-        var data = [{ prefix: "hubchatconnected_" }];
+        var data = [{ prefix: "hubchatconnected_" }];        
+        //var data = [{ prefix: "igbaacn" }];
         //var data = [{ prefix: "7944784300419098170" }];
         //var data = [{ prefix: "tin" }, { prefix: "tan" }];
         for (var i = 0; i < data.length; i++) {
@@ -498,6 +499,41 @@
             },
             error: function (response) {
                 alert(response);
+            }
+        });
+    });
+
+    $('#btn_call').click(function () {
+        var dataCallCenter = {
+            agent: "Local/301@agents/n",
+            callerid: "0919859949",
+            uid: "1609831244.6417"
+        };
+        $.ajax({
+            type: "POST",
+            url: link + '/api/core/call-center/v1/webhook',
+            data: JSON.stringify(dataCallCenter),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                var encodedMsg = '';
+                encodedMsg = data;
+
+                const li = document.createElement("li");
+                li.textContent = encodedMsg;
+                document.getElementById("messagesList").appendChild(li);
+                //alert(data);
+            },
+            error: function (response) {
+                //alert(response);
+                console.log(response);
+                var encodedMsg = '';
+                encodedMsg = data;
+
+                const li = document.createElement("li");
+                li.textContent = encodedMsg;
+                document.getElementById("messagesList").appendChild(li);
             }
         });
     });
@@ -705,7 +741,8 @@
         //.withUrl(link + "/chatHub?userid=" + "114") 
         //.withAutomaticReconnect()
         //.withUrl(link + "/chatHub?userid=" + "Local/221@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        .withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntest", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+        //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntest", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+        .withUrl(link + "/chatHub?userid=" + "Local/301@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
         //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
         //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntestbyLamVT", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
         //.withUrl(link + "/chatHub?userid=" + "Local/220@agents/n") 
@@ -713,7 +750,8 @@
         .build();
     //localStorage.setItem("supporterid", "Local/221@agents/n")
     //localStorage.setItem("supporterid", "Local/222@agents/n")
-    localStorage.setItem("supporterid", "Local/222@agents/ntest")
+    //localStorage.setItem("supporterid", "Local/222@agents/ntest")
+    localStorage.setItem("supporterid", "Local/301@agents/n")
     //localStorage.setItem("supporterid", "Local/222@agents/ntestbyLamVT")
     //localStorage.setItem("supporterid", "Local/220@agents/n")
     //localStorage.setItem("supporterid", "SIP/221/n")
@@ -1087,9 +1125,11 @@
     });
 
     //#region Notification Hub
-    var officerid = "6a70a886-aff3-478d-8267-2e36cddef964";
+    //var officerid = "6a70a886-aff3-478d-8267-2e36cddef964";
+    var officerid = "72497e33-9a80-4d5a-b0c7-7c6073aab451";
     //var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
-    var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
+    //var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
+    var departmentid = "81e7cbf5-a24a-40c5-8764-e632841d9a87";
     //var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
     //Listen to notify Hub
     var connection1 = new signalR.HubConnectionBuilder()
@@ -1138,19 +1178,19 @@
     });
     //#endregion
 
-    async function Notifystart() {
-        try {
-            await connection1.start();
-            console.log("connected");
-        } catch (err) {
-            console.log(err);
-            setTimeout(() => Notifystart(), 5000);
-            console.log("reconnect");
-        }
-    };
+    //async function Notifystart() {
+    //    try {
+    //        await connection1.start();
+    //        console.log("connected");
+    //    } catch (err) {
+    //        console.log(err);
+    //        setTimeout(() => Notifystart(), 5000);
+    //        console.log("reconnect");
+    //    }
+    //};
 
-    connection1.onclose(async () => {
-        await Notifystart();
-    });
+    //connection1.onclose(async () => {
+    //    await Notifystart();
+    //});
     //#endregion
 });
