@@ -518,7 +518,7 @@
             success: function (data) {
                 console.log(data);
                 var encodedMsg = '';
-                encodedMsg = data;
+                encodedMsg = data.errorMsg;
 
                 const li = document.createElement("li");
                 li.textContent = encodedMsg;
