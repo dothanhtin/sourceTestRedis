@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
     //#region init
-    var link = "http://localhost:55567";
+    //var link = "http://localhost:55567";
     //var link = "http://localhost:44300";
     //var link = "http://222.255.102.205:5001";
-    //var link = "https://orimx-dev.vdc2.com.vn/kong";
+    var link = "https://orimx-dev.vdc2.com.vn/kong";
     //var link = "https://203.162.141.14:81";
     //var link = "https://orimx-demo.vnptit.vn/kong";
     //var link = "https://orimx.vnptit.vn/kong";
@@ -193,11 +193,11 @@
                         timestamp: "1559027868557",
                         oaid: "2659280042717887087",
                         //appid: "1691033564111571589",//dev
-                        //uid: "test",
+                        uid: "test", //test any one
                         //appid: "3837004637823339936",//demo
                         //uid: "6804797472710366949",//demo
                         appid: "1689397181570615473",//pro
-                        uid: "7944784300419098170",//pro
+                        //uid: "7944784300419098170",//pro
                         //uid: "test" + i,//test dev564111571589",
                         msgid: "fc142abd0909a456fd19",
                         message: "nội dung tin nhắn " + i,
@@ -1087,70 +1087,70 @@
     });
 
     //#region Notification Hub
-    var officerid = "6a70a886-aff3-478d-8267-2e36cddef964";
-    //var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
-    var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
-    //var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
-    //Listen to notify Hub
-    var connection1 = new signalR.HubConnectionBuilder()
-        .withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        .build();
-    connection1.on("ReceiveNotifyCrm", () => {
-        //alert("hub")
-        var encodedMsg = 'Hub notify';
+    //var officerid = "6a70a886-aff3-478d-8267-2e36cddef964";
+    ////var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
+    //var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
+    ////var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
+    ////Listen to notify Hub
+    //var connection1 = new signalR.HubConnectionBuilder()
+    //    .withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    .build();
+    //connection1.on("ReceiveNotifyCrm", () => {
+    //    //alert("hub")
+    //    var encodedMsg = 'Hub notify';
 
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-    });
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //});
 
-    connection1.on("TestAlone", () => {
-        var encodedMsg = 'Alone';
+    //connection1.on("TestAlone", () => {
+    //    var encodedMsg = 'Alone';
 
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-    });
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //});
 
-    connection1.on("ReceiveNotify", (processcode, departmentid, officerid, message) => {
-        var encodedMsg = 'Hub Processing: ' + "processcode: " + processcode + " departmentid: " + departmentid + " officerid: " + officerid + " message: " + message;
+    //connection1.on("ReceiveNotify", (processcode, departmentid, officerid, message) => {
+    //    var encodedMsg = 'Hub Processing: ' + "processcode: " + processcode + " departmentid: " + departmentid + " officerid: " + officerid + " message: " + message;
 
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-    });
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //});
 
-    connection1.start().then(function () {
-        console.log("connected1");
-    });
+    //connection1.start().then(function () {
+    //    console.log("connected1");
+    //});
 
-    //#region call method log out
-    connection1.on("RequireLogOut", (userid, oldConnectionid) => {
-        alert("abc");
-        var encodedMsg = '';
-        console.log(userid + ": " + oldConnectionid);
-        encodedMsg = (userid + ": " + oldConnectionid);
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-        //encodedMsg = "Log out: " + userid;
+    ////#region call method log out
+    //connection1.on("RequireLogOut", (userid, oldConnectionid) => {
+    //    alert("abc");
+    //    var encodedMsg = '';
+    //    console.log(userid + ": " + oldConnectionid);
+    //    encodedMsg = (userid + ": " + oldConnectionid);
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //    //encodedMsg = "Log out: " + userid;
 
-    });
-    //#endregion
+    //});
+    ////#endregion
 
-    async function Notifystart() {
-        try {
-            await connection1.start();
-            console.log("connected");
-        } catch (err) {
-            console.log(err);
-            setTimeout(() => Notifystart(), 5000);
-            console.log("reconnect");
-        }
-    };
+    //async function Notifystart() {
+    //    try {
+    //        await connection1.start();
+    //        console.log("connected");
+    //    } catch (err) {
+    //        console.log(err);
+    //        setTimeout(() => Notifystart(), 5000);
+    //        console.log("reconnect");
+    //    }
+    //};
 
-    connection1.onclose(async () => {
-        await Notifystart();
-    });
+    //connection1.onclose(async () => {
+    //    await Notifystart();
+    //});
     //#endregion
 });
