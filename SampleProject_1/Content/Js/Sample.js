@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
     //#region init
-    var link = "http://localhost:55567";
+    //var link = "http://localhost:55567";
     //var link = "http://localhost:44300";
     //var link = "http://222.255.102.205:5001";
     //var link = "https://orimx-dev.vdc2.com.vn/kong";
     //var link = "https://203.162.141.14:81";
-    //var link = "https://orimx-demo.vnptit.vn/kong";
+    var link = "https://orimx-demo.vnptit.vn/kong";
     //var link = "https://orimx.vnptit.vn/kong";
     //var link = "http://10.159.135.71:81";
     //var link = $('#txt_link').val();
@@ -505,7 +505,7 @@
 
     $('#btn_call').click(function () {
         var dataCallCenter = {
-            agent: "Local/301@agents/n",
+            agent: "Local/222@agents/n",
             callerid: "0919859949",
             uid: "1609831244.6417"
         };
@@ -737,24 +737,24 @@
     //#endregion
 
     //send to users
-    const connection = new signalR.HubConnectionBuilder()
-        //.withUrl(link + "/chatHub?userid=" + "114") 
-        //.withAutomaticReconnect()
-        //.withUrl(link + "/chatHub?userid=" + "Local/221@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntest", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        .withUrl(link + "/chatHub?userid=" + "Local/301@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntestbyLamVT", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        //.withUrl(link + "/chatHub?userid=" + "Local/220@agents/n") 
-        //.withUrl(link + "/chatHub?userid=" + "SIP/221/n")
-        .build();
-    //localStorage.setItem("supporterid", "Local/221@agents/n")
+    //const connection = new signalR.HubConnectionBuilder()
+    //    //.withUrl(link + "/chatHub?userid=" + "114") 
+    //    //.withAutomaticReconnect()
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/221@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntest", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/301@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    .withUrl(link + "/chatHub?userid=" + "Local/222@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntestbyLamVT", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/220@agents/n") 
+    //    //.withUrl(link + "/chatHub?userid=" + "SIP/221/n")
+    //    .build();
+    //////localStorage.setItem("supporterid", "Local/221@agents/n")
+    //////localStorage.setItem("supporterid", "Local/222@agents/n")
+    //////localStorage.setItem("supporterid", "Local/222@agents/ntest")
+    //////localStorage.setItem("supporterid", "Local/301@agents/n")
+    //////localStorage.setItem("supporterid", "Local/222@agents/ntestbyLamVT")
     //localStorage.setItem("supporterid", "Local/222@agents/n")
-    //localStorage.setItem("supporterid", "Local/222@agents/ntest")
-    localStorage.setItem("supporterid", "Local/301@agents/n")
-    //localStorage.setItem("supporterid", "Local/222@agents/ntestbyLamVT")
-    //localStorage.setItem("supporterid", "Local/220@agents/n")
-    //localStorage.setItem("supporterid", "SIP/221/n")
+    ////localStorage.setItem("supporterid", "SIP/221/n")
 
     //#region receive message from Zalo, Facebook
     connection.on("ReceiveMessageFw", (user, message) => {
@@ -1126,10 +1126,12 @@
 
     //#region Notification Hub
     //var officerid = "6a70a886-aff3-478d-8267-2e36cddef964";
-    var officerid = "72497e33-9a80-4d5a-b0c7-7c6073aab451";
+    //var officerid = "72497e33-9a80-4d5a-b0c7-7c6073aab451";
+    var officerid = "ed662d51-3f4b-4849-ad93-639f56c845f9";
     //var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
     //var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
-    var departmentid = "81e7cbf5-a24a-40c5-8764-e632841d9a87";
+    //var departmentid = "81e7cbf5-a24a-40c5-8764-e632841d9a87";
+    var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
     //var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
     //Listen to notify Hub
     var connection1 = new signalR.HubConnectionBuilder()
