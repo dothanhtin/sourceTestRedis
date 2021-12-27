@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
     //#region init
-    var link = "http://localhost:55567";
+    //var link = "http://localhost:55567";
     //var link = "http://localhost:44300";
     //var link = "http://222.255.102.205:5001";
     //var link = "https://orimx-dev.vdc2.com.vn/kong";
     //var link = "https://203.162.141.14:81";
     //var link = "https://orimx-demo.vnptit.vn/kong";
-    //var link = "https://orimx.vnptit.vn/kong";
+    var link = "https://orimx.vnptit.vn/kong";
     //var link = "http://10.159.135.71:81";
     //var link = $('#txt_link').val();
     var chooseButton = 0;
@@ -112,36 +112,39 @@
     $("#btn_sendMessage").click(function () {
 
         var x = $('#n_request').val();
-        for (var i = 0; i <= Number(x); i++) {
-            var data = {
-                event: "sendmsg",
-                timestamp: "1559027868557",
-                oaid: "2659280042717887087",
-                appid: "1691033564111571589",
-                uid: "test" + i,
-                msgid: "fc142abd0909a456fd19",
-                message: "nội dung tin nhắn " + i,
-                username: "Tran Phat",
-                avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
-                appname: "ORIM",
-                apptype: "Zalo"
-            }
-            //data.uid += i;
-            //data.message += i;
-            $.ajax({
-                type: "POST",
-                url: link + '/api/core/zalo/v2/receiveText',
-                data: JSON.stringify(data),
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function (data) {
-                    console.log(data);
-                    console.log("count request: " + i);
-                },
-                error: function (response) {
-                    alert(response);
+        for (var i = 0; i < Number(x); i++) {
+            //setTimeout(() => {
+                var data = {
+                    event: "sendmsg",
+                    timestamp: "1559027868557",
+                    oaid: "2659280042717887087",
+                    //appid: "1691033564111571589",
+                    appid: "1689397181570615473",//pro
+                    uid: "test" + i,
+                    msgid: "fc142abd0909a456fd19",
+                    message: "nội dung tin nhắn " + i,
+                    username: "Tran Phat",
+                    avatar: "http://s120.avatar.talk.zdn.vn/f/6/7/c/10/120/b522d3d1f4f92091ddad3bd8f84f15bc.jpg",
+                    appname: "ORIM",
+                    apptype: "Zalo"
                 }
-            });
+                //data.uid += i;
+                //data.message += i;
+                $.ajax({
+                    type: "POST",
+                    url: link + '/api/core/zalo/v2/receiveText',
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        console.log(data);
+                        console.log("count request: " + i);
+                    },
+                    error: function (response) {
+                        alert(response);
+                    }
+                });
+            //}, 1000);
         }
     });
 
@@ -246,10 +249,10 @@
                 timestamp: "1559027868557",
                 oaid: "2659280042717887087",
                 //appid: "1691033564111571589",//dev
-                appid: "3837004637823339936",//demo
-                //appid: "1689397181570615473",//pro
-                //uid: "7944784300419098170",//pro
-                uid: "6804797472710366949",//demo
+                //appid: "3837004637823339936",//demo
+                appid: "1689397181570615473",//pro
+                uid: "7944784300419098170",//pro
+                //uid: "6804797472710366949",//demo
                 msgid: "fc142abd0909a456fd19",
                 message: "nội dung tin nhắn " + i,
                 username: "Tran Phat",
@@ -333,7 +336,7 @@
     });
 
     $('#btn_clearPrefixKey').click(function () {
-        var data = [{ prefix: "hubchatconnected_" }];        
+        var data = [{ prefix: "hubchatconnected_" }];
         //var data = [{ prefix: "igbaacn" }];
         //var data = [{ prefix: "7944784300419098170" }];
         //var data = [{ prefix: "tin" }, { prefix: "tan" }];
@@ -736,331 +739,63 @@
 
     //#endregion
 
-    //send to users
-    const connection = new signalR.HubConnectionBuilder()
-        //.withUrl(link + "/chatHub?userid=" + "114") 
-        //.withAutomaticReconnect()
-        //.withUrl(link + "/chatHub?userid=" + "Local/221@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntest", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        .withUrl(link + "/chatHub?userid=" + "Local/301@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntestbyLamVT", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        //.withUrl(link + "/chatHub?userid=" + "Local/220@agents/n") 
-        //.withUrl(link + "/chatHub?userid=" + "SIP/221/n")
-        .build();
-    //localStorage.setItem("supporterid", "Local/221@agents/n")
-    //localStorage.setItem("supporterid", "Local/222@agents/n")
-    //localStorage.setItem("supporterid", "Local/222@agents/ntest")
-    localStorage.setItem("supporterid", "Local/301@agents/n")
-    //localStorage.setItem("supporterid", "Local/222@agents/ntestbyLamVT")
-    //localStorage.setItem("supporterid", "Local/220@agents/n")
-    //localStorage.setItem("supporterid", "SIP/221/n")
-
-    //#region receive message from Zalo, Facebook
-    connection.on("ReceiveMessageFw", (user, message) => {
-        var encodedMsg = '';
-
-        console.log(message);
-        encodedMsg = message.username + " says: " + message.message;
-        localStorage.setItem("zaloUid", user);
-        localStorage.setItem("appid", message.appid);
-
-        const li = document.createElement("li");
-        li.textContent = encodedMsg + ' ' + new Date();
-        document.getElementById("messagesList").appendChild(li);
-    });
-    //#endregion
-
-    connection.on("ReceiveMessageBw", (supporterid, message) => {
-        var encodedMsg = '';
-
-        //switch (message.)
-        encodedMsg = supporterid + " says: " + message.message;
-
-        const li = document.createElement("li");
-        li.textContent = encodedMsg + ' ' + new Date();
-        document.getElementById("messagesList").appendChild(li);
-    });
-    //connection.onreconnected((connectionId) => {
-    //    console.assert(connection.state === signalR.HubConnectionState.Connected);
-
-    //    document.getElementById("messageInput").disabled = false;
-
-    //    const li = document.createElement("li");
-    //    li.textContent = `Connection reestablished. Connected with connectionId "${connectionId}".`;
-    //    document.getElementById("messagesList").appendChild(li);
-    //});
-
-    $('#getConnectId').click(function () {
-        connection.invoke('getConnectionId')
-            .then(function (connectionId) {
-                // Send the connectionId to controller
-                document.getElementById("txt_connectionId").value = connectionId;
-            });
-    });
-
-    document.getElementById("sendButton").addEventListener("click", event => {
-        //const user = document.getElementById("userInput").value;
-        //const user2 = document.getElementById("userInput2").value;
-        //connectionIdUserId = $('#txt_connectionId').val();
-        //connectionIdUserId2 = $('#txt_connectionId2').val();
-        const message = document.getElementById("messageInput").value;
-
-        //#region model test
-        var textLiveChatobj = {
-            appType: "FACEBOOK",
-            typeMessage: "",
-            appid: localStorage.getItem("appid"),
-            uid: localStorage.getItem("zaloUid"),
-            supporterid: localStorage.getItem("supporterid"),
-            supportername: "Default",
-            message: message,
-            imageUrl: "",
-            imageTitle: "",
-            imageDes: "",
-            videoUrl: "",
-            videoTitle: "",
-            videoDes: "",
-            videoThumb: "",
-            linkUrl: "",
-            linkTitle: "",
-            linkDes: "",
-            linkThumb: "",
-            buttons: []
-        }
-
-        var textFacebookobj = {
-            appType: "FACEBOOK",
-            typeMessage: "Text",
-            appid: "301082624172553",
-            uid: "2827532807284177",
-            supporterid: "Local/221@agents/n",
-            supportername: "Default",
-            message: "hello",
-            imageUrl: "",
-            imageTitle: "",
-            imageDes: "",
-            videoUrl: "",
-            videoTitle: "",
-            videoDes: "",
-            videoThumb: "",
-            linkUrl: "",
-            linkTitle: "",
-            linkDes: "",
-            linkThumb: "",
-            buttons: []
-        }
-
-        var textobj = {
-            appType: "ZALO",
-            typeMessage: "Text",
-            appid: localStorage.getItem("appid"),
-            //appid: "3837004637823339936",
-            uid: localStorage.getItem("zaloUid"),
-            //uid:"1668401301593382803",
-            //uid: "2827532807284177",
-            supporterid: "Local/222@agents/n",
-            supportername: "Default",
-            message: message,
-            imageUrl: "",
-            imageTitle: "",
-            imageDes: "",
-            videoUrl: "",
-            videoTitle: "",
-            videoDes: "",
-            videoThumb: "",
-            linkUrl: "",
-            linkTitle: "",
-            linkDes: "",
-            linkThumb: "",
-            buttons: []
-        }
-
-        var photoobj = {
-            appType: "ZALO",
-            typeMessage: "ZaloPhoto",
-            appid: localStorage.getItem("appid"),
-            uid: localStorage.getItem("zaloUid"),
-            supporterid: localStorage.getItem("supporterid"),
-            supportername: "Default",
-            message: "",
-            imageUrl: "http://f7.photo.talk.zdn.vn/3514182034986952260/061a20c2402da573fc3c.jpg",
-            imageTitle: "VNPT 4.0",
-            imageDes: "Test gửi ảnh qua API",
-            videoUrl: "",
-            videoTitle: "",
-            videoDes: "",
-            videoThumb: "",
-            linkUrl: "",
-            linkTitle: "",
-            linkDes: "",
-            linkThumb: "",
-            buttons: []
-        }
-
-        var videoobj = {
-            appType: "ZaloChat",
-            typeMessage: "ZaloVideo",
-            appid: localStorage.getItem("appid"),
-            uid: localStorage.getItem("zaloUid"),
-            supporterid: localStorage.getItem("supporterid"),
-            supportername: "Default",
-            message: "",
-            imageUrl: "",
-            imageTitle: "",
-            imageDes: "",
-            videoUrl: "https://f4-zvc.zdn.vn/de37331a8f72662c3f63/4792746507320521936",
-            videoTitle: "VNPT IT 2 - Một chiều mưa",
-            videoDes: "Test gửi video qua API",
-            videoThumb: "http://f16.photo.talk.zdn.vn/3560010979617812631/23214f1e5aecbfb2e6fd.jpg",
-            linkUrl: "",
-            linkTitle: "",
-            linkDes: "",
-            linkThumb: "",
-            buttons: []
-        }
-
-        var linkobj = {
-            appType: "ZaloChat",
-            typeMessage: "ZaloLink",
-            appid: localStorage.getItem("appid"),
-            uid: localStorage.getItem("zaloUid"),
-            supporterid: localStorage.getItem("supporterid"),
-            supportername: "Default",
-            message: "",
-            imageUrl: "",
-            imageTitle: "",
-            imageDes: "",
-            videoUrl: "",
-            videoTitle: "",
-            videoDes: "",
-            videoThumb: "",
-            linkUrl: "https://vnptit.vn",
-            linkTitle: "vnptit.vn",
-            linkDes: "Test gửi link qua API",
-            linkThumb: "http://f7.photo.talk.zdn.vn/3514182034986952260/061a20c2402da573fc3c.jpg",
-            buttons: []
-        }
-
-        var buttonsobj = {
-            appType: "ZaloChat",
-            typeMessage: "ZaloSendButton",
-            appid: localStorage.getItem("appid"),
-            uid: localStorage.getItem("zaloUid"),
-            supporterid: localStorage.getItem("supporterid"),
-            supportername: "Default",
-            message: message,
-            imageUrl: "",
-            imageTitle: "",
-            imageDes: "",
-            videoUrl: "",
-            videoTitle: "",
-            videoDes: "",
-            videoThumb: "",
-            linkUrl: "",
-            linkTitle: "",
-            linkDes: "",
-            linkThumb: "",
-            buttons: [
-                {
-                    "title": "Nút số 1",
-                    "payload": "#1"
-                },
-                {
-                    "title": "Nút số 2",
-                    "payload": "kiểm tra nút bấm"
-                },
-                {
-                    "title": "Nút số 3",
-                    "payload": "123456789"
-                }
-            ]
-        }
-
-        //#endregion
-        var x = $('#n_request').val();
-        //connection.invoke("SendPrivateMessageBackward", localStorage.getItem("supporterid"), message, localStorage.getItem("zaloUid")).catch(err => console.log(err.toString()));
-        //connection.invoke("SendPrivateMessageBackward", textFacebookobj).catch(err => console.log(err.toString()));
-        //connection.invoke("SendPrivateMessageBackward", textobj).catch(err => console.log(err.toString()));
-        for (var i = 0; i < x; i++) {
-            sendBw(i);
-        }
-        event.preventDefault();
-    });
-
-    function sendBw(i) {
-        setTimeout(function () {
-            var textobj = {
-                appType: "ZALO",
-                typeMessage: "Text",
-                appid: localStorage.getItem("appid"),
-                //appid: "3837004637823339936",
-                uid: localStorage.getItem("zaloUid"),
-                //uid:"1668401301593382803",
-                //uid: "2827532807284177",
-                //supporterid: "Local/222@agents/ntest",
-                supporterid: localStorage.getItem("supporterid"),
-                supportername: "Default",
-                message: "Hi " + i,
-                imageUrl: "",
-                imageTitle: "",
-                imageDes: "",
-                videoUrl: "",
-                videoTitle: "",
-                videoDes: "",
-                videoThumb: "",
-                linkUrl: "",
-                linkTitle: "",
-                linkDes: "",
-                linkThumb: "",
-                buttons: []
-            }
-            connection.invoke("SendPrivateMessageBackward", textobj, false, null).catch(err => console.log(err.toString()));
-        }, 0);
-    }
-    $('#finishedChat').click(function () {
-        connection.invoke("FinishedChat", localStorage.getItem("zaloUid"), localStorage.getItem("appid"), "ZALO").catch(err => console.log(err.toString()));
-    });
-
-    $('#finishedCall').click(function () {
-        connection.invoke("FinishedCall", localStorage.getItem("supporterid")).catch(err => console.log(err.toString()));
-    });
-
-    //$('#finishedChat').click(function () {
-    //    connection.invoke("FinishedChat", "2568260225332317919", "1689397181570615473", "ZALO")
-    //        .catch(err => console.log(err.toString()));
-    //});
-
-    //#region Send to user new
-
-    //const connection = new signalR.HubConnectionBuilder()
-    //    .withUrl(link + "/chatHub")
-    //    .configureLogging(signalR.LogLevel.Information)
+    ////send to users
+    //var connection = new signalR.HubConnectionBuilder()
+    //    //.withUrl(link + "/chatHub?userid=" + "114") 
+    //    //.withAutomaticReconnect()
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/221@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntest", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/301@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    .withUrl(link + "/chatHub?userid=" + "Local/222@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    .configureLogging(signalR.LogLevel.Debug)
+    //    .configureLogging(signalR.LogLevel.Trace)
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/n", { transport: signalR.HttpTransportType.LongPolling })
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/222@agents/ntestbyLamVT", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    //.withUrl(link + "/chatHub?userid=" + "Local/220@agents/n") 
+    //    //.withUrl(link + "/chatHub?userid=" + "SIP/221/n")
     //    .build();
+    //////localStorage.setItem("supporterid", "Local/221@agents/n")
+    //localStorage.setItem("supporterid", "Local/222@agents/n")
+    //////localStorage.setItem("supporterid", "Local/222@agents/ntest")
+    ////localStorage.setItem("supporterid", "Local/301@agents/n")
+    ////localStorage.setItem("supporterid", "Local/222@agents/ntestbyLamVT")
+    ////localStorage.setItem("supporterid", "Local/220@agents/n")
+    ////localStorage.setItem("supporterid", "SIP/221/n")
 
-    //connection.on("ReceiveMessage", (user,message) => {
+    ////#region receive message from Zalo, Facebook
+    //connection.on("ReceiveMessageFw", (user, message) => {
     //    var encodedMsg = '';
-    //    //if ($('#userInput2').val() == '' || $('#userInput2').val() == null) {
-    //    //    encodedMsg = $('#userInput').val() + " says: " + message;
-    //    //}
-    //    //else {
-    //    //    encodedMsg = $('#userInput').val() + " says: " + message;
-    //    //    encodedMsg = $('#userInput').val() + " says: " + message;
-    //    //}
-    //    encodedMsg = user + " says: " + message;
+
+    //    console.log(message);
+    //    encodedMsg = message.username + " says: " + message.message;
+    //    localStorage.setItem("zaloUid", user);
+    //    localStorage.setItem("appid", message.appid);
 
     //    const li = document.createElement("li");
-    //    li.textContent = encodedMsg;
+    //    li.textContent = encodedMsg + ' ' + new Date();
     //    document.getElementById("messagesList").appendChild(li);
     //});
+    ////#endregion
 
-    //$('#getUserId').click(function () {
-    //    connection.invoke('GetUserId')
-    //        .then(function (userId) {
-    //            // Send the connectionId to controller
-    //            document.getElementById("userInput").value = userId;
-    //        });
+    //connection.on("ReceiveMessageBw", (supporterid, message) => {
+    //    var encodedMsg = '';
+
+    //    //switch (message.)
+    //    encodedMsg = supporterid + " says: " + message.message;
+
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg + ' ' + new Date();
+    //    document.getElementById("messagesList").appendChild(li);
     //});
+    ////connection.onreconnected((connectionId) => {
+    ////    console.assert(connection.state === signalR.HubConnectionState.Connected);
+
+    ////    document.getElementById("messageInput").disabled = false;
+
+    ////    const li = document.createElement("li");
+    ////    li.textContent = `Connection reestablished. Connected with connectionId "${connectionId}".`;
+    ////    document.getElementById("messagesList").appendChild(li);
+    ////});
 
     //$('#getConnectId').click(function () {
     //    connection.invoke('getConnectionId')
@@ -1071,126 +806,421 @@
     //});
 
     //document.getElementById("sendButton").addEventListener("click", event => {
-    //    const user = document.getElementById("userInput").value;
-    //    const user2 = document.getElementById("userInput2").value;
+    //    //const user = document.getElementById("userInput").value;
+    //    //const user2 = document.getElementById("userInput2").value;
     //    //connectionIdUserId = $('#txt_connectionId').val();
     //    //connectionIdUserId2 = $('#txt_connectionId2').val();
     //    const message = document.getElementById("messageInput").value;
 
-    //    connection.invoke("SendPrivateMessageToUser", user, message, user2).catch(err => console.log(err.toString()));
+    //    //#region model test
+    //    var textLiveChatobj = {
+    //        appType: "FACEBOOK",
+    //        typeMessage: "",
+    //        appid: localStorage.getItem("appid"),
+    //        uid: localStorage.getItem("zaloUid"),
+    //        supporterid: localStorage.getItem("supporterid"),
+    //        supportername: "Default",
+    //        message: message,
+    //        imageUrl: "",
+    //        imageTitle: "",
+    //        imageDes: "",
+    //        videoUrl: "",
+    //        videoTitle: "",
+    //        videoDes: "",
+    //        videoThumb: "",
+    //        linkUrl: "",
+    //        linkTitle: "",
+    //        linkDes: "",
+    //        linkThumb: "",
+    //        buttons: []
+    //    }
+
+    //    var textFacebookobj = {
+    //        appType: "FACEBOOK",
+    //        typeMessage: "Text",
+    //        appid: "301082624172553",
+    //        uid: "2827532807284177",
+    //        supporterid: "Local/221@agents/n",
+    //        supportername: "Default",
+    //        message: "hello",
+    //        imageUrl: "",
+    //        imageTitle: "",
+    //        imageDes: "",
+    //        videoUrl: "",
+    //        videoTitle: "",
+    //        videoDes: "",
+    //        videoThumb: "",
+    //        linkUrl: "",
+    //        linkTitle: "",
+    //        linkDes: "",
+    //        linkThumb: "",
+    //        buttons: []
+    //    }
+
+    //    var textobj = {
+    //        appType: "ZALO",
+    //        typeMessage: "Text",
+    //        appid: localStorage.getItem("appid"),
+    //        //appid: "3837004637823339936",
+    //        uid: localStorage.getItem("zaloUid"),
+    //        //uid:"1668401301593382803",
+    //        //uid: "2827532807284177",
+    //        supporterid: "Local/222@agents/n",
+    //        supportername: "Default",
+    //        message: message,
+    //        imageUrl: "",
+    //        imageTitle: "",
+    //        imageDes: "",
+    //        videoUrl: "",
+    //        videoTitle: "",
+    //        videoDes: "",
+    //        videoThumb: "",
+    //        linkUrl: "",
+    //        linkTitle: "",
+    //        linkDes: "",
+    //        linkThumb: "",
+    //        buttons: []
+    //    }
+
+    //    var photoobj = {
+    //        appType: "ZALO",
+    //        typeMessage: "ZaloPhoto",
+    //        appid: localStorage.getItem("appid"),
+    //        uid: localStorage.getItem("zaloUid"),
+    //        supporterid: localStorage.getItem("supporterid"),
+    //        supportername: "Default",
+    //        message: "",
+    //        imageUrl: "http://f7.photo.talk.zdn.vn/3514182034986952260/061a20c2402da573fc3c.jpg",
+    //        imageTitle: "VNPT 4.0",
+    //        imageDes: "Test gửi ảnh qua API",
+    //        videoUrl: "",
+    //        videoTitle: "",
+    //        videoDes: "",
+    //        videoThumb: "",
+    //        linkUrl: "",
+    //        linkTitle: "",
+    //        linkDes: "",
+    //        linkThumb: "",
+    //        buttons: []
+    //    }
+
+    //    var videoobj = {
+    //        appType: "ZaloChat",
+    //        typeMessage: "ZaloVideo",
+    //        appid: localStorage.getItem("appid"),
+    //        uid: localStorage.getItem("zaloUid"),
+    //        supporterid: localStorage.getItem("supporterid"),
+    //        supportername: "Default",
+    //        message: "",
+    //        imageUrl: "",
+    //        imageTitle: "",
+    //        imageDes: "",
+    //        videoUrl: "https://f4-zvc.zdn.vn/de37331a8f72662c3f63/4792746507320521936",
+    //        videoTitle: "VNPT IT 2 - Một chiều mưa",
+    //        videoDes: "Test gửi video qua API",
+    //        videoThumb: "http://f16.photo.talk.zdn.vn/3560010979617812631/23214f1e5aecbfb2e6fd.jpg",
+    //        linkUrl: "",
+    //        linkTitle: "",
+    //        linkDes: "",
+    //        linkThumb: "",
+    //        buttons: []
+    //    }
+
+    //    var linkobj = {
+    //        appType: "ZaloChat",
+    //        typeMessage: "ZaloLink",
+    //        appid: localStorage.getItem("appid"),
+    //        uid: localStorage.getItem("zaloUid"),
+    //        supporterid: localStorage.getItem("supporterid"),
+    //        supportername: "Default",
+    //        message: "",
+    //        imageUrl: "",
+    //        imageTitle: "",
+    //        imageDes: "",
+    //        videoUrl: "",
+    //        videoTitle: "",
+    //        videoDes: "",
+    //        videoThumb: "",
+    //        linkUrl: "https://vnptit.vn",
+    //        linkTitle: "vnptit.vn",
+    //        linkDes: "Test gửi link qua API",
+    //        linkThumb: "http://f7.photo.talk.zdn.vn/3514182034986952260/061a20c2402da573fc3c.jpg",
+    //        buttons: []
+    //    }
+
+    //    var buttonsobj = {
+    //        appType: "ZaloChat",
+    //        typeMessage: "ZaloSendButton",
+    //        appid: localStorage.getItem("appid"),
+    //        uid: localStorage.getItem("zaloUid"),
+    //        supporterid: localStorage.getItem("supporterid"),
+    //        supportername: "Default",
+    //        message: message,
+    //        imageUrl: "",
+    //        imageTitle: "",
+    //        imageDes: "",
+    //        videoUrl: "",
+    //        videoTitle: "",
+    //        videoDes: "",
+    //        videoThumb: "",
+    //        linkUrl: "",
+    //        linkTitle: "",
+    //        linkDes: "",
+    //        linkThumb: "",
+    //        buttons: [
+    //            {
+    //                "title": "Nút số 1",
+    //                "payload": "#1"
+    //            },
+    //            {
+    //                "title": "Nút số 2",
+    //                "payload": "kiểm tra nút bấm"
+    //            },
+    //            {
+    //                "title": "Nút số 3",
+    //                "payload": "123456789"
+    //            }
+    //        ]
+    //    }
+
+    //    //#endregion
+    //    var x = $('#n_request').val();
+    //    //connection.invoke("SendPrivateMessageBackward", localStorage.getItem("supporterid"), message, localStorage.getItem("zaloUid")).catch(err => console.log(err.toString()));
+    //    //connection.invoke("SendPrivateMessageBackward", textFacebookobj).catch(err => console.log(err.toString()));
+    //    //connection.invoke("SendPrivateMessageBackward", textobj).catch(err => console.log(err.toString()));
+    //    for (var i = 0; i < x; i++) {
+    //        sendBw(i);
+    //    }
     //    event.preventDefault();
     //});
-    //#endregion
 
-    connection.start().then(function () {
-        console.log("connected");
-    });
-
-    //Listen to call Hub
-    //const connection1 = new signalR.HubConnectionBuilder()
-    //    .withUrl(link + "/callHub?userid=" + "002")
-    //    .build();
-    connection.on("ReceiveCall", (callerid, agent, uid) => {
-        //debugger
-        var encodedMsg = '';
-
-        console.log(agent);
-        console.log(uid);
-        encodedMsg = callerid + " is calling....";
-
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-    });
-
-    //connection1.start().then(function () {
-    //    console.log("connected1");
+    //function sendBw(i) {
+    //    setTimeout(function () {
+    //        var textobj = {
+    //            appType: "ZALO",
+    //            typeMessage: "Text",
+    //            appid: localStorage.getItem("appid"),
+    //            //appid: "3837004637823339936",
+    //            uid: localStorage.getItem("zaloUid"),
+    //            //uid:"1668401301593382803",
+    //            //uid: "2827532807284177",
+    //            //supporterid: "Local/222@agents/ntest",
+    //            supporterid: localStorage.getItem("supporterid"),
+    //            supportername: "Default",
+    //            message: "Hi " + i,
+    //            imageUrl: "",
+    //            imageTitle: "",
+    //            imageDes: "",
+    //            videoUrl: "",
+    //            videoTitle: "",
+    //            videoDes: "",
+    //            videoThumb: "",
+    //            linkUrl: "",
+    //            linkTitle: "",
+    //            linkDes: "",
+    //            linkThumb: "",
+    //            buttons: []
+    //        }
+    //        connection.invoke("SendPrivateMessageBackward", textobj, false, null).catch(err => console.log(err.toString()));
+    //    }, 0);
+    //}
+    //$('#finishedChat').click(function () {
+    //    connection.invoke("FinishedChat", localStorage.getItem("zaloUid"), localStorage.getItem("appid"), "ZALO").catch(err => console.log(err.toString()));
     //});
 
-    async function start() {
-        try {
-            await connection.start();
-            console.log("connected");
-        } catch (err) {
-            console.log(err);
-            setTimeout(() => start(), 5000);
-            console.log("reconnect");
-        }
-    };
+    //$('#finishedCall').click(function () {
+    //    connection.invoke("FinishedCall", localStorage.getItem("supporterid")).catch(err => console.log(err.toString()));
+    //});
 
-    connection.onclose(async (x) => {
-        if (x != null) {
-            await start();
-        }
-    });
+    ////$('#finishedChat').click(function () {
+    ////    connection.invoke("FinishedChat", "2568260225332317919", "1689397181570615473", "ZALO")
+    ////        .catch(err => console.log(err.toString()));
+    ////});
 
-    //#region Notification Hub
-    //var officerid = "6a70a886-aff3-478d-8267-2e36cddef964";
-    var officerid = "72497e33-9a80-4d5a-b0c7-7c6073aab451";
-    //var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
-    //var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
-    var departmentid = "81e7cbf5-a24a-40c5-8764-e632841d9a87";
-    //var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
-    //Listen to notify Hub
-    var connection1 = new signalR.HubConnectionBuilder()
-        .withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
-        .build();
-    connection1.on("ReceiveNotifyCrm", () => {
-        //alert("hub")
-        var encodedMsg = 'Hub notify';
+    ////#region Send to user new
 
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-    });
+    ////const connection = new signalR.HubConnectionBuilder()
+    ////    .withUrl(link + "/chatHub")
+    ////    .configureLogging(signalR.LogLevel.Information)
+    ////    .build();
 
-    connection1.on("TestAlone", () => {
-        var encodedMsg = 'Alone';
+    ////connection.on("ReceiveMessage", (user,message) => {
+    ////    var encodedMsg = '';
+    ////    //if ($('#userInput2').val() == '' || $('#userInput2').val() == null) {
+    ////    //    encodedMsg = $('#userInput').val() + " says: " + message;
+    ////    //}
+    ////    //else {
+    ////    //    encodedMsg = $('#userInput').val() + " says: " + message;
+    ////    //    encodedMsg = $('#userInput').val() + " says: " + message;
+    ////    //}
+    ////    encodedMsg = user + " says: " + message;
 
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-    });
+    ////    const li = document.createElement("li");
+    ////    li.textContent = encodedMsg;
+    ////    document.getElementById("messagesList").appendChild(li);
+    ////});
 
-    connection1.on("ReceiveNotify", (processcode, departmentid, officerid, message) => {
-        var encodedMsg = 'Hub Processing: ' + "processcode: " + processcode + " departmentid: " + departmentid + " officerid: " + officerid + " message: " + message;
+    ////$('#getUserId').click(function () {
+    ////    connection.invoke('GetUserId')
+    ////        .then(function (userId) {
+    ////            // Send the connectionId to controller
+    ////            document.getElementById("userInput").value = userId;
+    ////        });
+    ////});
 
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-    });
+    ////$('#getConnectId').click(function () {
+    ////    connection.invoke('getConnectionId')
+    ////        .then(function (connectionId) {
+    ////            // Send the connectionId to controller
+    ////            document.getElementById("txt_connectionId").value = connectionId;
+    ////        });
+    ////});
 
-    connection1.start().then(function () {
-        console.log("connected1");
-    });
+    ////document.getElementById("sendButton").addEventListener("click", event => {
+    ////    const user = document.getElementById("userInput").value;
+    ////    const user2 = document.getElementById("userInput2").value;
+    ////    //connectionIdUserId = $('#txt_connectionId').val();
+    ////    //connectionIdUserId2 = $('#txt_connectionId2').val();
+    ////    const message = document.getElementById("messageInput").value;
 
-    //#region call method log out
-    connection1.on("RequireLogOut", (userid, oldConnectionid) => {
-        alert("abc");
-        var encodedMsg = '';
-        console.log(userid + ": " + oldConnectionid);
-        encodedMsg = (userid + ": " + oldConnectionid);
-        const li = document.createElement("li");
-        li.textContent = encodedMsg;
-        document.getElementById("messagesList").appendChild(li);
-        //encodedMsg = "Log out: " + userid;
+    ////    connection.invoke("SendPrivateMessageToUser", user, message, user2).catch(err => console.log(err.toString()));
+    ////    event.preventDefault();
+    ////});
+    ////#endregion
 
-    });
-    //#endregion
+    ////connection.start().then(function () {
+    ////    console.log("connected");
+    ////});
+    //start();
 
-    //async function Notifystart() {
+    ////Listen to call Hub
+    ////const connection1 = new signalR.HubConnectionBuilder()
+    ////    .withUrl(link + "/callHub?userid=" + "002")
+    ////    .build();
+    //connection.on("ReceiveCall", (callerid, agent, uid) => {
+    //    //debugger
+    //    var encodedMsg = '';
+
+    //    console.log(agent);
+    //    console.log(uid);
+    //    encodedMsg = callerid + " is calling....";
+
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //});
+
+    ////connection1.start().then(function () {
+    ////    console.log("connected1");
+    ////});
+
+    
+    //async function start() {
     //    try {
-    //        await connection1.start();
+    //        await connection.start();
     //        console.log("connected");
     //    } catch (err) {
     //        console.log(err);
-    //        setTimeout(() => Notifystart(), 5000);
+    //        //setTimeout(() => start(), 10000);
+    //        setTimeout(() => createNewConnectionHub(), 10000);
     //        console.log("reconnect");
     //    }
     //};
 
+    //function createNewConnectionHub(){
+    //    connection = new signalR.HubConnectionBuilder()
+    //        .withUrl(link + "/chatHub?userid=" + "Local/222@agents/n", { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //        .configureLogging(signalR.LogLevel.Debug)
+    //        .configureLogging(signalR.LogLevel.Trace)
+    //        .build();
+    //};
+
+    //connection.onclose(async (x) => {
+    //        await start();
+    //});
+
+    //#region Notification Hub
+    ////var officerid = "6a70a886-aff3-478d-8267-2e36cddef964";
+    //var officerid = "72497e33-9a80-4d5a-b0c7-7c6073aab451";
+    ////var officerid = "05c5c8ff-78c0-4b6d-9b8d-9de43a2ba575";
+    ////var departmentid = "8d22727e-2fa8-4627-84c5-e2b36bca5d28";
+    //var departmentid = "81e7cbf5-a24a-40c5-8764-e632841d9a87";
+    ////var departmentid = "5866357e-8251-4975-b56d-4dd971c73685";
+    ////Listen to notify Hub
+    //let connection1 = new signalR.HubConnectionBuilder()
+    //    .withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //    .configureLogging(signalR.LogLevel.Debug)
+    //    .configureLogging(signalR.LogLevel.Trace)
+    //    //.withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.LongPolling })
+    //    .build();
+    //connection1.on("ReceiveNotifyCrm", () => {
+    //    //alert("hub")
+    //    var encodedMsg = 'Hub notify';
+
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //});
+
+    //connection1.on("TestAlone", () => {
+    //    var encodedMsg = 'Alone';
+
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //});
+
+    //connection1.on("ReceiveNotify", (processcode, departmentid, officerid, message) => {
+    //    var encodedMsg = 'Hub Processing: ' + "processcode: " + processcode + " departmentid: " + departmentid + " officerid: " + officerid + " message: " + message;
+
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //});
+
+    ////connection1.start().then(function () {
+    ////    console.log("connected1");
+    ////});
+    //Notifystart();
+    ////#region call method log out
+    //connection1.on("RequireLogOut", (userid, oldConnectionid) => {
+    //    alert("abc");
+    //    var encodedMsg = '';
+    //    console.log(userid + ": " + oldConnectionid);
+    //    encodedMsg = (userid + ": " + oldConnectionid);
+    //    const li = document.createElement("li");
+    //    li.textContent = encodedMsg;
+    //    document.getElementById("messagesList").appendChild(li);
+    //    //encodedMsg = "Log out: " + userid;
+
+    //});
+    ////#endregion
+
+    ////#region retry
+    //async function Notifystart() {
+    //    try {
+    //        await connection1.start();
+    //        console.log("connected1");
+    //    } catch (err) {
+    //        console.log(err);
+    //        //setTimeout(() => Notifystart(), 10000);
+    //        setTimeout(() => CreateNewConnection1(), 10000);
+    //        console.log("reconnect");
+    //    }
+    //};
+
+    //function CreateNewConnection1() {
+    //    connection1 = new signalR.HubConnectionBuilder()
+    //        .withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling })
+    //        .configureLogging(signalR.LogLevel.Debug)
+    //        .configureLogging(signalR.LogLevel.Trace)
+    //        //.withUrl(link + "/NotificationHub?officerid=" + officerid + "&departmentid=" + departmentid, { transport: signalR.HttpTransportType.LongPolling })
+    //        .build();
+    //}
+
     //connection1.onclose(async () => {
     //    await Notifystart();
     //});
+    //#endregion
     //#endregion
 });
